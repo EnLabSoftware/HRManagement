@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace API.Extensions
+﻿namespace API.Extensions
 {
-    public class ApplicationBuilderExtensions
+    public static class ApplicationBuilderExtensions
     {
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Domain.Base;
 using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    class IUnitOfWork
+    public interface IUnitOfWork
     {
+        Task<int> SaveChangesAsync();
+
+        IAsyncRepository<T> AsyncRepository<T>() where T : BaseEntity;
     }
 }

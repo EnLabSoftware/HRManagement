@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace API.Extensions
 {
-    public class ServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
+        
     }
 }

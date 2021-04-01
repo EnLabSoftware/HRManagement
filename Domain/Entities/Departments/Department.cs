@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Domain.Base;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities.Departments
 {
-    class Department
+    public partial class Department : BaseEntity<short>
     {
+        public string Name { get; internal set; }
+        public string Description { get; internal set; }
+
+        public virtual ICollection<User> Users { get; internal set; }
     }
 }

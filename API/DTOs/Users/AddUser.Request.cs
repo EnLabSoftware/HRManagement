@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace API.DTOs.Users
 {
-    public class AddUser
+    public class AddUserRequest
     {
         [Required]
         [StringLength(50)]

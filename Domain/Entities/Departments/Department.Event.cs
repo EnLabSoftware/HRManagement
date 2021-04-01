@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Domain.Base;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities.Departments
 {
-    class Department
+    public partial class Department
     {
+
     }
 }
