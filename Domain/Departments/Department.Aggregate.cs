@@ -22,10 +22,5 @@ namespace Domain.Departments
             Name = name;
             Description = description;
         }
-
-        public void AddUser(User user)
-        {
-            this.Users.Add(user);
-        }
     }
 }

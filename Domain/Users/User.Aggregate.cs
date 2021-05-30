@@ -1,11 +1,12 @@
-﻿using Domain.Departments;
+﻿using Domain.Base;
+using Domain.Departments;
 using Domain.Entities.Users.Events;
 using System;
 using System.Linq;
 
 namespace Domain.Users
 {
-    public partial class User
+    public partial class User: IAggregateRoot
     {
         public User(string userName
             , string firstName
@@ -38,9 +39,9 @@ namespace Domain.Users
             DepartmentId = departmentId;
         }
 
-        public void AddDepartment(Department department)
+        public void AddDepartment(int departmentId)
         {
-            Department = department;
+            DepartmentId = departmentId;
         }
 
         public Payslip AddPayslip(DateTime date
