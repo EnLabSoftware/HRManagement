@@ -1,7 +1,8 @@
 ﻿using Domain.Base;
+using Domain.Users;
 using System.Collections.Generic;
 
-namespace Domain.Entities.Departments
+namespace Domain.Departments
 {
     public partial class Department : BaseEntity<short>
     {
