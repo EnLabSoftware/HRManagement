@@ -1,10 +1,16 @@
-using API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Business.Users;
+using Business.Departments;
+using Business.Interfaces;
+using Data.EF.Repositories;
+using Data.EF;
+using Service.Users;
 
 namespace API
 {
@@ -21,11 +27,20 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             // Application services
+            //    .AddDatabase(Configuration)
+            services.AddDbContext<EFContext>(options =>
+                     options.UseSqlServer(Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
+            //    .AddUnitOfWork()
             services
-                .AddDatabase(Configuration)
-                .AddUnitOfWork()
-                .AddRepositories()
-                .AddBusinessServices();
+                .AddScoped<IUnitOfWork, UnitOfWork>();
+            //    .AddRepositories()
+            services
+                .AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>))
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //    .AddBusinessServices();
+            services
+                .AddScoped<UserService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

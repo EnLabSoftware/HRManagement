@@ -29,8 +29,10 @@ namespace API.Extensions
         public static IServiceCollection AddDatabase(this IServiceCollection services
             , IConfiguration configuration)
         {
+            //return services.AddDbContext<EFContext>(options =>
+            //         options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString")));
             return services.AddDbContext<EFContext>(options =>
-                     options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString")));
+                     options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("API")));
         }
 
         public static IServiceCollection AddBusinessServices(this IServiceCollection services

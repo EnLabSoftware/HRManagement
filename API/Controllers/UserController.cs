@@ -1,7 +1,7 @@
-﻿using API.DTOs.Users;
-using API.Services.Users;
+﻿using Common.DTOs.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Service.Users;
 using System.Threading.Tasks;
 
 namespace API.Controllers
