@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P3.Data", "Data\P3.Data.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A49CE96-6476-4183-9432-A13C6F59E65C}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.txt = Readme.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P5.Common", "Common\P5.Common.csproj", "{5CC9B999-C61E-440D-8783-E7F2354BD2EE}"
