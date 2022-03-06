@@ -128,7 +128,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 10
   testRunner.Given("I have the following request body:", "{\r\n\"userName\": \"Micl\",\r\n\"firstName\": \"Leung\",\r\n\"lastName\": \"Michael\",\r\n\"address\":" +
                         " \"Kwong Chiu Terrace\",\r\n\"birthDate\": \"1961-03-04T00:00:00.000Z\",\r\n\"departmentId\"" +
-                        ": 0\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                        ": 1\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 21
   testRunner.When("I post this request to the \"users\" operation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -137,7 +137,7 @@ this.ScenarioInitialize(scenarioInfo);
   testRunner.Then("the result is a 200 (\"OK\") response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 23
-  testRunner.And("the response body description username is (\"Micl\") and ID is (1)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the response contains username (\"Micl\") and ID (1) and Department (\"IT\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

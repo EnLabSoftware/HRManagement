@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Business.Departments;
 
 namespace P6.StoryTest.StepDefinitions
 {
@@ -56,6 +57,9 @@ namespace P6.StoryTest.StepDefinitions
                 db.Database.ExecuteSqlRaw("Drop Table IF Exists Departments");
                 db.Database.ExecuteSqlRaw("Drop Table IF Exists __EFMigrationsHistory");
                 db.Database.Migrate();
+                DbSet<Department> _dbSet = db.Set<Department>();
+                _dbSet.Add(new Department("IT", "Information Technology"));
+                db.SaveChanges();
             }
         }
     }

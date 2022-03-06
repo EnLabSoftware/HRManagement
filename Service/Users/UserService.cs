@@ -1,6 +1,7 @@
 ﻿using Common.DTOs.Users;
 using Data.EF.Interfaces;
 using Business.Users;
+using Business.Departments;
 
 namespace Service.Users
 {
@@ -12,6 +13,8 @@ namespace Service.Users
 
         public async Task<AddUserResponse> AddNewAsync(AddUserRequest model)
         {
+            var deptRepos = UnitOfWork.AsyncRepository<Department>();
+            var dept = await deptRepos.GetAsync(_ => _.Id == model.DepartmentId);
             // You can you some mapping tools as such as AutoMapper
             var user = new User(model.UserName
                 , model.FirstName
@@ -20,6 +23,10 @@ namespace Service.Users
                 , model.BirthDate
                 , model.DepartmentId.Value);
 
+            if (dept != null) {
+                user.AddDepartment(dept);
+            }
+
             var repository = UnitOfWork.AsyncRepository<User>();
             await repository.AddAsync(user);
             await UnitOfWork.SaveChangesAsync();
@@ -27,7 +34,8 @@ namespace Service.Users
             var response = new AddUserResponse()
             {
                 Id = user.Id,
-                UserName = user.UserName
+                UserName = user.UserName,
+                DepartmentName = user.Department?.Name
             };
 
             return response;
@@ -71,7 +79,8 @@ namespace Service.Users
                 FirstName = _.FirstName,
                 Id = _.Id,
                 LastName = _.LastName,
-                UserName = _.UserName
+                UserName = _.UserName,
+                DepartmentName = _.Department?.Name
             })
             .ToList();
 

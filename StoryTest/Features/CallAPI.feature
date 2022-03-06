@@ -15,9 +15,9 @@ Scenario: CallAPIAddNew
   "lastName": "Michael",
   "address": "Kwong Chiu Terrace",
   "birthDate": "1961-03-04T00:00:00.000Z",
-  "departmentId": 0
+  "departmentId": 1
 }
   """
   When I post this request to the "users" operation
   Then the result is a 200 ("OK") response
-  And the response body description username is ("Micl") and ID is (1)
+  And the response contains username ("Micl") and ID (1) and Department ("IT")

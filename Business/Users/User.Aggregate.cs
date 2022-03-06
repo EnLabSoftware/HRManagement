@@ -1,5 +1,5 @@
 ﻿using Business.Base;
-//using Business.Users.Departments;
+using Business.Departments;
 using Business.Users.Events;
 using System;
 using System.Linq;
@@ -39,9 +39,10 @@ namespace Business.Users
             DepartmentId = departmentId;
         }
 
-        public void AddDepartment(int departmentId)
+        public void AddDepartment(Department department)
         {
-            DepartmentId = departmentId;
+            Department = department;
+            //DepartmentId = departmentId;
         }
 
         public Payslip AddPayslip(DateTime date

@@ -65,13 +65,15 @@ namespace P6.StoryTest.StepDefinitions
             Assert.AreEqual(ResponseStatusCode, context.Get<string>("ResponseReasonPhrase"));
         }
 
-        [Then(@"the response body description username is \(""([^""]*)""\) and ID is \((.*)\)")]
-        public void ThenTheResponseBodyDescriptionUsernameIsAndIDIs(string micl, int p1)
+        [Then(@"the response contains username \(""([^""]*)""\) and ID \((.*)\) and Department \(""([^""]*)""\)")]
+        public void ThenTheResponseContainsUsernameAndIDAndDepartment(string micl, int p1, string iT)
         {
             AddUserResponse result = JsonConvert.DeserializeObject<AddUserResponse>(context.Get<string>("ResponseBody"));
             Assert.AreEqual(result.UserName, micl);
             Assert.AreEqual(result.Id, p1);
+            Assert.AreEqual(result.DepartmentName, iT);
         }
+
 
 
     }

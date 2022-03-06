@@ -23,6 +23,20 @@ public abstract class RootEntity {
 * return services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
 * modelBuilder.Ignore<RootEntity>().Ignore<BaseDomainEvent>();
 
+## Tidy up Business
+* Move Share & DTO from Business to Common
+* Move Interface from Business to Data
+
+## Add SpecFlow, StepDefinitaionBase
+* appsettings.test.json: define a new test SQLDB
+* client: created by WebApplicationFactory<br>test SQLDB injected into client
+* Drop test SQLDB tables (careful of sequence due to forign keys)
+* Run Client's EF migration to create a empty DB
+* Load initial data after migration
+
+## Enable layz loading
+* .UseLazyLoadingProxies()
+
 ## More EF Migration commmands
 * dotnet ef migrations remove --context Data.EF.EFContext --startup-project ..\API\P1.API.csproj
 * dotnet ef migrations script --context Data.EF.EFContext --startup-project ..\API\P1.API.csproj --output Migrations\script.sql
