@@ -20,10 +20,11 @@ public abstract class RootEntity {
   protected RootEntity() {
      _events = new List<BaseDomainEvent>();
   }
-```
+``` 
 * return services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
-* modelBuilder.Ignore<RootEntity>().Ignore<BaseDomainEvent>();
-
+``` 
+  modelBuilder.Ignore<RootEntity>().Ignore<BaseDomainEvent>();
+``` 
 ## Tidy up Business
 * Move Share & DTO from Business to Common
 * Move Interface from Business to Data
