@@ -13,8 +13,14 @@ I have a SOLID+DDD+Specflow based .net framework and would like to migrate to .N
 * Create DB: <br>dotnet ef database update  --startup-project ..\API\P1.API.csproj
 
 ## Changes to made EF Migration work
-* public abstract class RootEntity
-* return services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("Data")));
+* Separate the RootEntity
+```
+public abstract class RootEntity {
+  protected RootEntity() {
+     _events = new List<BaseDomainEvent>();
+  }
+```
+* return services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
 * modelBuilder.Ignore<RootEntity>().Ignore<BaseDomainEvent>();
 
 ## More EF Migration commmands

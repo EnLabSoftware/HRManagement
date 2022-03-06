@@ -20,4 +20,4 @@ Scenario: CallAPIAddNew
   """
   When I post this request to the "users" operation
   Then the result is a 200 ("OK") response
-  And the response body description username is ("Micl")
+  And the response body description username is ("Micl") and ID is (1)

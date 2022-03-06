@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Threading.Tasks;
+using Data.EF;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
@@ -13,7 +16,14 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<EFContext>();
+                //db.Database.Migrate();
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
