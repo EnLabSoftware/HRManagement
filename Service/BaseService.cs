@@ -1,4 +1,4 @@
-﻿using Business.Interfaces;
+﻿using Data.EF.Interfaces;
 
 namespace Service
 {

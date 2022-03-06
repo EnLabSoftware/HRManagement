@@ -1,5 +1,5 @@
 ﻿using Common.DTOs.Users;
-using Business.Interfaces;
+using Data.EF.Interfaces;
 using Business.Users;
 
 namespace Service.Users

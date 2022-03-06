@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\**" />
     <Compile Remove="Shared\**" />
     <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Shared\**" />
     <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Interfaces\**" />
     <None Remove="Shared\**" />
     <None Remove="ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Departments\IDepartmentRepository.cs" />
+    <Compile Remove="Users\IUserRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

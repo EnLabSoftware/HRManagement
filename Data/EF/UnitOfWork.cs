@@ -1,5 +1,5 @@
 ﻿using Business.Base;
-using Business.Interfaces;
+using Data.EF.Interfaces;
 using Data.EF.Repositories;
 using System;
 using System.Threading.Tasks;

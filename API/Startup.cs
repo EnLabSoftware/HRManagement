@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Business.Users;
 using Business.Departments;
-using Business.Interfaces;
+using Data.EF.Interfaces;
 using Data.EF.Repositories;
 using Data.EF;
 using Service.Users;

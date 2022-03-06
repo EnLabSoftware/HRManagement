@@ -1,7 +1,7 @@
 ﻿using Business.Base;
 using System.Threading.Tasks;
 
-namespace Business.Interfaces
+namespace Data.EF.Interfaces
 {
     public interface IUnitOfWork
     {

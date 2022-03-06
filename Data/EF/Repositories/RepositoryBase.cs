@@ -1,5 +1,5 @@
 ﻿using Business.Base;
-using Business.Interfaces;
+using Data.EF.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
