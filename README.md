@@ -13,6 +13,7 @@ I have a SOLID+DDD+Specflow based .net framework and would like to migrate to .N
 * Create DB: <br>dotnet ef database update  --startup-project ..\API\P1.API.csproj
 
 ## Changes to made EF Migration work
+* retain MediatR for future CQRS
 * Separate the RootEntity
 ```
 public abstract class RootEntity {
@@ -34,8 +35,17 @@ public abstract class RootEntity {
 * Run Client's EF migration to create a empty DB
 * Load initial data after migration
 
-## Enable layz loading
-* .UseLazyLoadingProxies()
+## Repository
+* use Generic repository to manipulate individual Entity
+```
+RepositoryBase<T>(_dbContext);
+```
+* use custom repository with Eager loading for performance
+```
+   return _dbSet.Where(expression)
+      .Include(User => User.Department)
+      .ToListAsync();
+```
 
 ## More EF Migration commmands
 * dotnet ef migrations remove --context Data.EF.EFContext --startup-project ..\API\P1.API.csproj

@@ -24,4 +24,9 @@ public class UnitOfWork : IUnitOfWork
     {
         return _dbContext.SaveChangesAsync();
     }
+
+    public IUserRepository UserRepository()
+    {
+        return new UserRepository(_dbContext);
+    }
 }

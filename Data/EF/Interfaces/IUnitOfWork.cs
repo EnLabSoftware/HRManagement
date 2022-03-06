@@ -8,5 +8,7 @@ namespace Data.EF.Interfaces
         Task<int> SaveChangesAsync();
 
         IAsyncRepository<T> AsyncRepository<T>() where T : RootEntity;
+
+        IUserRepository UserRepository();
     }
 }

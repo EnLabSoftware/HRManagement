@@ -31,7 +31,7 @@ namespace API
             // var temp = Configuration.GetConnectionString("DDDConnectionString");
             services.AddDbContext<EFContext>(options =>
                      options
-                     .UseLazyLoadingProxies()
+//                     .UseLazyLoadingProxies()
                      .UseSqlServer(Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
             //    .AddUnitOfWork()
             services

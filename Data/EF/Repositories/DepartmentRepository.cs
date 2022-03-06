@@ -1,4 +1,5 @@
 ﻿using Business.Departments;
+using Data.EF.Interfaces;
 
 namespace Data.EF.Repositories
 {

@@ -67,9 +67,11 @@ namespace Service.Users
 
         public async Task<List<UserInfoDTO>> SearchAsync(GetUserRequest request)
         {
-            var repository = UnitOfWork.AsyncRepository<User>();
+//            var repository = UnitOfWork.AsyncRepository<User>();
+            var repository = UnitOfWork.UserRepository();
             var users = await repository
-                .ListAsync(_ => _.UserName.Contains(request.Search));
+                .ListAsyncwithDept(_ => _.UserName.Contains(request.Search));
+//                .ListAsync(_ => _.UserName.Contains(request.Search));
 
             var userDTOs = users.Select(_ => new UserInfoDTO()
             {

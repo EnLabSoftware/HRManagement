@@ -1,6 +1,6 @@
-﻿using Data.EF.Interfaces;
+﻿using Business.Departments;
 
-namespace Business.Departments
+namespace Data.EF.Interfaces
 {
     public interface IDepartmentRepository : IAsyncRepository<Department>
     {
