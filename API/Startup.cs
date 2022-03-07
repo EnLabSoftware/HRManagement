@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Business.Users;
-using Business.Departments;
 using Data.EF.Interfaces;
 using Data.EF.Repositories;
 using Data.EF;
@@ -27,21 +25,21 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             // Application services
-            //    .AddDatabase(Configuration)
+
             // var temp = Configuration.GetConnectionString("DDDConnectionString");
             services.AddDbContext<EFContext>(options =>
                      options
 //                     .UseLazyLoadingProxies()
                      .UseSqlServer(Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
-            //    .AddUnitOfWork()
+
             services
                 .AddScoped<IUnitOfWork, UnitOfWork>();
-            //    .AddRepositories()
+
             services
                 .AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>))
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IDepartmentRepository, DepartmentRepository>();
-            //    .AddBusinessServices();
+
             services
                 .AddScoped<UserService>();
 
