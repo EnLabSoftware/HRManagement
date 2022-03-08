@@ -1,8 +1,6 @@
 ﻿using Common.DTOs.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Service.Users;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -20,14 +18,14 @@ namespace API.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetUserList")]
         public async Task<IActionResult> Get([FromQuery] GetUserRequest request)
         {
             var users = await _service.SearchAsync(request);
             return Ok(users);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "AddNewUser")]
         public async Task<IActionResult> Add([FromBody] AddUserRequest request)
         {
             var users = await _service.AddNewAsync(request);

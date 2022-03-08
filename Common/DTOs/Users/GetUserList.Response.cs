@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Common.DTOs.Users
 {
     public class UserInfoDTO

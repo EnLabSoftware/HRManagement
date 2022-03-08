@@ -2,7 +2,6 @@
 using Business.Departments;
 using Business.Users;
 using Business.Base;
-using System.Collections.Generic;
 
 namespace Data.EF
 {

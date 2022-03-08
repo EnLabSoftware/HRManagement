@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace Business.Base
 {
     public abstract class RootEntity

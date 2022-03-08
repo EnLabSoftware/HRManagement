@@ -1,8 +1,6 @@
 ﻿using Business.Base;
 using Business.Departments;
 using Business.Users.Events;
-using System;
-using System.Linq;
 
 namespace Business.Users
 {

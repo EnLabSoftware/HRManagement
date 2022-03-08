@@ -6,10 +6,6 @@ using API;
 using Service;
 using Common.DTOs.Users;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace P6.StoryTest.StepDefinitions
 {
@@ -18,7 +14,7 @@ namespace P6.StoryTest.StepDefinitions
     {
         public CallAPIStepDefinitions(
           ScenarioContext context,
-          WebApplicationFactory<Startup> webApplicationFactory) : base(context, webApplicationFactory)
+          WebApplicationFactory<Program> webApplicationFactory) : base(context, webApplicationFactory)
         {
         }
 

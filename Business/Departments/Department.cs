@@ -1,6 +1,5 @@
 ﻿using Business.Base;
 using Business.Users;
-using System.Collections.Generic;
 
 namespace Business.Departments
 {

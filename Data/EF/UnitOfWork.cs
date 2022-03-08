@@ -1,8 +1,6 @@
 ﻿using Business.Base;
 using Data.EF.Interfaces;
 using Data.EF.Repositories;
-using System;
-using System.Threading.Tasks;
 
 namespace Data.EF;
 

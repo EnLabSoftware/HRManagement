@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,5 +33,8 @@
     <ProjectReference Include="..\Data\P3.Data.csproj" />
     <ProjectReference Include="..\Service\P2.Service.csproj" />
   </ItemGroup>
-
+	
+  <ItemGroup>
+	<InternalsVisibleTo Include="P6.StoryTest" />
+  </ItemGroup>
 </Project>

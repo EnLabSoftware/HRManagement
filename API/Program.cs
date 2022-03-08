@@ -1,36 +1,53 @@
-using Microsoft.AspNetCore.Hosting;
-//using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-//using Microsoft.Extensions.Logging;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-using Data.EF;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Data.EF.Interfaces;
+using Data.EF.Repositories;
+using Data.EF;
+using Service.Users;
+using Microsoft.OpenApi.Models;
 
-namespace API
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+var temp = builder.Configuration.GetConnectionString("DDDConnectionString");
+builder.Services.AddDbContext<EFContext>(options =>
+         options
+         //                     .UseLazyLoadingProxies()
+         .UseSqlServer(builder.Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
+
+builder.Services
+    .AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services
+    .AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>))
+    .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+builder.Services
+    .AddScoped<UserService>();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            //CreateHostBuilder(args).Build().Run();
-            var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<EFContext>();
-                //db.Database.Migrate();
-            }
-            host.Run();
-        }
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+public partial class Program { }
