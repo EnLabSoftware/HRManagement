@@ -4,11 +4,18 @@ using Data.EF.Repositories;
 using Data.EF;
 using Service.Users;
 using Microsoft.OpenApi.Models;
+using Autofac.Extensions.DependencyInjection;
 
 const string AllowCors = "AllowCors";
 const string CORS_ORIGINS = "CorsOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+//var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+//{
+//    Args = args,
+//    // Look for static files in webroot
+//    WebRootPath = "esafety"
+//});
 
 // allow CORS
 builder.Services.AddCors(option => option.AddPolicy(
@@ -16,6 +23,8 @@ builder.Services.AddCors(option => option.AddPolicy(
     policy =>
         policy.WithOrigins(builder.Configuration.GetSection(CORS_ORIGINS).Get<string[]>()).AllowAnyHeader().AllowCredentials().AllowAnyMethod()
 ));
+// Autofac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 // Add services to the container.
 var temp = builder.Configuration.GetConnectionString("DDDConnectionString");
@@ -62,5 +71,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//app.Urls.Add("http://localhost:3000");
 app.Run();
 public partial class Program { }
