@@ -5,6 +5,7 @@ using Data.EF;
 using Service.Users;
 using Microsoft.OpenApi.Models;
 using Autofac.Extensions.DependencyInjection;
+using Autofac;
 
 const string AllowCors = "AllowCors";
 const string CORS_ORIGINS = "CorsOrigins";
@@ -25,25 +26,28 @@ builder.Services.AddCors(option => option.AddPolicy(
 ));
 // Autofac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(cbuilder => cbuilder.RegisterModule(new API.RegisterModule(builder.Configuration)));
 
+// Moved to Autofac
 // Add services to the container.
-var temp = builder.Configuration.GetConnectionString("DDDConnectionString");
-builder.Services.AddDbContext<EFContext>(options =>
-         options
-         //                     .UseLazyLoadingProxies()
-         .UseSqlServer(builder.Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
+//var temp = builder.Configuration.GetConnectionString("DDDConnectionString");
+//builder.Services.AddDbContext<EFContext>(options =>
+//         options
+//         //                     .UseLazyLoadingProxies()
+//         .UseSqlServer(builder.Configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
 
-builder.Services
-    .AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services
+//    .AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services
-    .AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>))
-    .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IDepartmentRepository, DepartmentRepository>();
+//builder.Services
+//    .AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>))
+//    .AddScoped<IUserRepository, UserRepository>()
+//    .AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-builder.Services
-    .AddScoped<UserService>();
+//builder.Services
+//    .AddScoped<UserService>();
 
+// Add other features
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

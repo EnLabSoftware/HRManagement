@@ -54,6 +54,7 @@ RepositoryBase<T>(_dbContext);
       .Include(User => User.Department)
       .ToListAsync();
 ```
+## User of Autofac DI
 
 ## More EF Migration commmands
 * dotnet ef migrations remove --context Data.EF.EFContext --startup-project ..\API\P1.API.csproj
