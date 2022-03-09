@@ -5,8 +5,17 @@ using Data.EF;
 using Service.Users;
 using Microsoft.OpenApi.Models;
 
+const string AllowCors = "AllowCors";
+const string CORS_ORIGINS = "CorsOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+// allow CORS
+builder.Services.AddCors(option => option.AddPolicy(
+    AllowCors,
+    policy =>
+        policy.WithOrigins(builder.Configuration.GetSection(CORS_ORIGINS).Get<string[]>()).AllowAnyHeader().AllowCredentials().AllowAnyMethod()
+));
 
 // Add services to the container.
 var temp = builder.Configuration.GetConnectionString("DDDConnectionString");
@@ -33,6 +42,8 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
 });
 
+builder.Services.AddAuthentication();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,8 +54,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
 }
 
-app.UseHttpsRedirection();
+app.UseCors(AllowCors);
 
+app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

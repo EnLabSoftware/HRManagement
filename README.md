@@ -13,6 +13,7 @@ I have a SOLID+DDD+Specflow based .net framework and would like to migrate to .N
 * Create DB: <br>dotnet ef database update  --startup-project ..\API\P1.API.csproj
 
 ## Changes to made EF Migration work
+* convert Program.cs to .NET webApplication builder
 * retain MediatR for future CQRS
 * Separate the RootEntity
 ```
@@ -20,18 +21,24 @@ public abstract class RootEntity {
   protected RootEntity() {
      _events = new List<BaseDomainEvent>();
   }
-``` 
-* return services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
-``` 
+
+protected override void OnModelCreating(ModelBuilder modelBuilder) {
   modelBuilder.Ignore<RootEntity>().Ignore<BaseDomainEvent>();
 ``` 
+* in Program.cs
+``` 
+builder.Services.AddDbContext<EFContext>(options => <br> options.UseSqlServer(configuration.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data")));
+``` 
+
 ## Tidy up Business
 * Move Share & DTO from Business to Common
 * Move Interface from Business to Data
 
 ## Add SpecFlow, StepDefinitaionBase
 * appsettings.test.json: define a new test SQLDB
-* client: created by WebApplicationFactory<br>test SQLDB injected into client
+* client: created by custom WebApplicationFactory<br>test SQLDB injected into client
+** public partial class Program { }
+** ref: https://github.com/dotnet/aspnetcore/issues/37680
 * Drop test SQLDB tables (careful of sequence due to forign keys)
 * Run Client's EF migration to create a empty DB
 * Load initial data after migration
