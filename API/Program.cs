@@ -6,6 +6,8 @@ using Service.Users;
 using Microsoft.OpenApi.Models;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using AutoMapper;
+using Service.MapperProfiles;
 
 const string AllowCors = "AllowCors";
 const string CORS_ORIGINS = "CorsOrigins";
@@ -46,6 +48,9 @@ builder.Host.ConfigureContainer<ContainerBuilder>(cbuilder => cbuilder.RegisterM
 
 //builder.Services
 //    .AddScoped<UserService>();
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Service.MapperProfiles.UserProfile).Assembly);
 
 // Add other features
 builder.Services.AddControllers();

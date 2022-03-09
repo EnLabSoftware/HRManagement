@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\P5.Common.csproj" />
     <ProjectReference Include="..\Business\P4.Business.csproj" />
     <ProjectReference Include="..\Data\P3.Data.csproj" />
