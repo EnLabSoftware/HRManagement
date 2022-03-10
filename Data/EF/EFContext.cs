@@ -10,11 +10,16 @@ namespace Data.EF
         public DbSet<User> Users { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Payslip> Payslips { get; set; }
+        public EFContext() { } // for EF power tool
         public EFContext(DbContextOptions<EFContext> options) : base(options)
         {
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(); // for EF power tool
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

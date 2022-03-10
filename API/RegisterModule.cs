@@ -4,9 +4,6 @@ using Data.EF.Interfaces;
 using Data.EF.Repositories;
 using Data.EF;
 using Service.Users;
-using Microsoft.OpenApi.Models;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 
 namespace API
 {
@@ -15,7 +12,7 @@ namespace API
         ConfigurationManager _conf;
         protected override void Load(ContainerBuilder builder)
         {
-            var temp = _conf.GetConnectionString("DDDConnectionString");
+            string dbconstr = _conf.GetConnectionString("DDDConnectionString");
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
@@ -25,7 +22,7 @@ namespace API
             builder.Register(c => {
                 var options = new DbContextOptionsBuilder<EFContext>();
                 options.UseLoggerFactory(c.Resolve<ILoggerFactory>()).EnableSensitiveDataLogging();
-                options.UseSqlServer(_conf.GetConnectionString("DDDConnectionString"), b => b.MigrationsAssembly("P3.Data"));
+                options.UseSqlServer(dbconstr, b => b.MigrationsAssembly("P3.Data"));
                 return options.Options;
             }).InstancePerLifetimeScope();
             builder.RegisterType<EFContext>()
